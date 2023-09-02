@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>PROMISE AND ASYNC OR AWAIT</title>
+</head>
+<body>
+    <h1>PROMISE ASYNC AWAIT</h1>
+    <h2>Guess the correct output and write down the reason behind the output in details.</h2>
+    <h2>Problem Statement</h2>
+
+
+    <h2>Q1 : Write one example explaining how you can write a callback function.</h2>
+    <p> Ans : <pre>
+        function first(callback){
+            console.log("Hey I am first")
+            callback()
+          }
+          
+          function second(){
+            console.log("hey i am second")
+          }
+          
+          
+          first(second)
+    </pre></p>
+    <hr>
+    <h2>Q2 : <pre>
+        "Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec,
+         3 should be printed after 3 sec, and so on. 
+
+Explain callback hell.
+Numbers
+1
+2
+3
+4
+5
+6
+7"
+    </pre></h2>
+    <p>Ans : <pre> 
+        
+        function numberss(callback){
+            let num=1
+        
+            function print(){
+                console.log(num)
+                num++
+            }
+            if( n <=7){
+                setTimeout(numberss , print * 1000)
+            }
+            else{
+                callback()
+            }
+            print()
+        }
+        numberss()
+        
+    </pre></p>
+    <hr>
+    <h2> Q3:
+        <pre>Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec,
+           3 should be printed after 3 sec, and so on. 
+
+Numbers
+1
+2
+3
+4
+5
+6
+7"
+        </pre>
+    </h2>
+    <p>Ans : <pre>function printNumbersWithDelays() {
+        const numbers = [1, 2, 3, 4, 5, 6, 7];
+        const promises = [];
+      
+        numbers.forEach((num) => {
+          const promise = new Promise((resolve) => {
+            setTimeout(() => {
+              console.log(num);
+              resolve();
+            }, num * 1000); // Delay is set in milliseconds, so num * 1000 ms.
+          });
+      
+          promises.push(promise);
+        });
+      
+        return Promise.all(promises);
+      }
+      
+      printNumbersWithDelays().then(() => {
+        console.log("All numbers have been printed.");
+      });
+      </pre></p>
+      <hr>
+      <h2>Q4: "Create a promise function accepting an argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed 
+        then it should go to reject the state and catch the error and print Promise Rejected "</h2>
+
+        <p>Ans : <pre>
+          function myPromiseFunction(arg) {
+            return new Promise((resolve, reject) => {
+              if (arg === "yes") {
+                resolve("Promise Resolved");
+              } else {
+                reject("Promise Rejected");
+              }
+            });
+          }
+          
+        </pre></p>
+        <hr>
+        <h2>Q5 : Create examples to explain callback function</h2>
+        <p>Ans : <pre>
+          // function
+function ans(name, callback) {
+    console.log('Hi' + ' ' + name);
+    callback();
+}
+
+// callback function
+function callMe() {
+    console.log('I am callback function');
+}
+
+// passing function as an argument
+ans('Alok', callMe);
+
+In this example, the greet function takes a name and a callback function as arguments. 
+It logs a greeting and then calls the callback function, which logs "Goodbye!".
+        </pre></p>
+        <hr>
+        <h2>Q6 : Create examples to explain callback hell function</h2>
+        <p>Ans: <pre>
+          function findFirstClue(callback) {
+            setTimeout(function() {
+              console.log("Found the first clue!");
+              callback();
+            }, 1000);
+          }
+          
+          function findSecondClue(callback) {
+            setTimeout(function() {
+              console.log("Found the second clue!");
+              callback();
+            }, 1500);
+          }
+          
+          function findFinalClue(callback) {
+            setTimeout(function() {
+              console.log("Found the final clue!");
+              callback();
+            }, 800);
+          }
+          
+          console.log("Let's start the treasure hunt!");
+          
+          findFirstClue(function() {
+            console.log("First clue found, onto the second one...");
+            
+            findSecondClue(function() {
+              console.log("Second clue found, now for the final clue...");
+              
+              findFinalClue(function() {
+                console.log("Found the final clue, let's claim the prize!");
+              });
+            });
+          });
+
+          
+          
+        </pre>Callback hell, also known as "Pyramid of Doom," is a situation that occurs when you have multiple nested callbacks within your code
+      </p>
+      <hr>
+        <h2>Q7 : Create examples to explain promises function</h2>
+        <p>Ans : <pre>
+          const count = true;
+
+let countValue = new Promise(function (resolve, reject) {
+    if (count) {
+        resolve("There is a count value.");
+    } else {
+        reject("There is no count value");
+    }
+});
+
+console.log(countValue);
+
+
+        </pre>In this code, a Promise named countValue is created based on the value of the count variable. If count is true, the Promise resolves with the message 
+        "There is a count value," otherwise, it rejects with the message The countValue Promise is then logged to the console. 
+        However, the console.log(countValue);
+         line will display the Promise object itself and not its resolved or rejected value, as Promises are asynchronous and 
+        their state is not immediately determined when they are created.</p>
+        <hr>
+        <h2>Q8: Create examples to explain async await function</h2>
+        <p>Ans: <pre>
+          // a promise
+let promise = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+    resolve('Promise resolved')}, 4000); 
+});
+
+// async function
+async function asyncFunc() {
+
+    // wait until the promise resolves 
+    let result = await promise; 
+
+    console.log(result);
+    console.log('hello');
+}
+
+// calling the async function
+asyncFunc();
+
+        </pre>
+      
+      in this code An async function named asyncFunc is defined, which uses the await keyword to wait for the promise to resolve. Once the promise is resolved, it logs the result ("Promise resolved") and "hello" to the console.
+
+      Finally, the asyncFunc function is called, which initiates the asynchronous operation and prints the result to the console after the promise has resolved.</p>
+      <hr>  
+      <h2>Q9 :Create examples to explain promise.all function</h2>
+        <p>Ans:
+        <pre>
+          const p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+              console.log('The first promise has resolved');
+              resolve(10);
+            }, 1 * 1000);
+          });
+          const p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+              console.log('The second promise has resolved');
+              resolve(20);
+            }, 2 * 1000);
+          });
+          const p3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+              console.log('The third promise has resolved');
+              resolve(30);
+            }, 3 * 1000);
+          });
+          
+          Promise.all([p1, p2, p3]).then((results) => {
+            const total = results.reduce((p, c) => p + c);
+          
+            console.log(`Results: ${results}`);
+            console.log(`Total: ${total}`);
+          });
+        </pre>
+        This code creates three promises (p1, p2, and p3) that resolve after different delays. It then uses Promise.all() to wait for all these promises to resolve and calculates the total of their resolved values. Finally, it logs the individual results and the total sum of the resolved values to the console.</p>
+</body>
+</html>
